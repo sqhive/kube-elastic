@@ -2,6 +2,7 @@ apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
   name: es-client
+  namespace: elastic
   labels:
     component: elasticsearch
     role: client
