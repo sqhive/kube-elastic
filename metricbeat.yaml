@@ -1,0 +1,37 @@
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: metricbeat
+  namespace: elastic
+  labels:
+    app: metricbeat
+spec:
+  serviceName: metricbeat
+  replicas: 1
+  selector:
+    matchLabels:
+     app: metricbeat
+  template:
+    metadata:
+      labels:
+        app: metricbeat
+    spec:
+      containers:
+        - name: kibana
+          image: docker.elastic.co/beats/metricbeat:6.2.4
+          args: [
+            "-c", "/etc/metricbeat/metricbeat.yml",
+            "-e",
+          ]
+          env:
+            - name: ELASTICSEARCH_HOST
+              value: "elasticsearch"
+            - name: ELASTICSEARCH_PORT
+              value: "9200"
+          volumeMounts:
+            - name: config
+              mountPath: /etc/metricbeat
+      volumes:
+        - name: config
+          configMap:
+            name: metricbeat-config

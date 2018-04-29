@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: metricbeat-config
+  namespace: elastic
+  labels:
+    app: metricbeat
+data:
+  metricbeat.yml: |+
+    metricbeat.modules:
+    - module: mongodb
+      metricsets: ['status', 'dbstats', 'collstats']
+      period: 10s
+      hosts: ['mongo.mongo:27017']
+      db: instagram
+      collections: ['posts', 'accounts', 'locations']
+
+    output.elasticsearch:
+      hosts: ['elasticsearch:9200']
+    setup:
+      dashboards.enabled: true
+      kibana:
+        host: 'kibana:5601'
