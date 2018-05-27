@@ -8,20 +8,22 @@ metadata:
     role: master
 spec:
   serviceName: elastic
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
         component: elasticsearch
         role: master
     spec:
+      nodeSelector:
+        cloud.google.com/gke-nodepool: preemptible-pool
       initContainers:
         - name: init-sysctl
           image: busybox:1.27.2
           command:
-          - sysctl
-          - -w
-          - vm.max_map_count=262144
+            - sysctl
+            - -w
+            - vm.max_map_count=262144
           securityContext:
             privileged: true
       containers:
@@ -38,7 +40,7 @@ spec:
             - name: CLUSTER_NAME
               value: "myesdb"
             - name: NUMBER_OF_MASTERS
-              value: "2"
+              value: "1"
             - name: NODE_MASTER
               value: "true"
             - name: NODE_INGEST

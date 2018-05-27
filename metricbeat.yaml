@@ -16,6 +16,8 @@ spec:
       labels:
         app: metricbeat
     spec:
+      nodeSelector:
+        cloud.google.com/gke-nodepool: preemptible-pool
       containers:
         - name: kibana
           image: docker.elastic.co/beats/metricbeat:6.2.4
