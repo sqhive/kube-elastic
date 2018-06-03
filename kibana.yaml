@@ -25,7 +25,7 @@ spec:
             - name: CLUSTER_NAME
               value: "myesdb"
             - name: ELASTICSEARCH_URL
-              value: "http://elasticsearch:9200"
+              value: "http://search:80"
           ports:
             - containerPort: 5601
               name: kibana
