@@ -61,9 +61,10 @@ spec:
             - containerPort: 9300
               name: transport
           volumeMounts:
-            - name: storage
+            - name: elastic-data-storage
               mountPath: /data
       volumes:
-        - emptyDir:
-            medium: ""
-          name: "storage"
+        - name: elastic-data-storage
+          gcePersistentDisk:
+            fsType: ext4
+            pdName: elastic-master-disk

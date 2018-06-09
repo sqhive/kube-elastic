@@ -71,9 +71,10 @@ spec:
             initialDelaySeconds: 20
             timeoutSeconds: 5
           volumeMounts:
-          - name: storage
+          - name: elastic-data-storage
             mountPath: /data
       volumes:
-          - emptyDir:
-              medium: ""
-            name: storage
+        - name: elastic-data-storage
+          gcePersistentDisk:
+            fsType: ext4
+            pdName: elastic-client-disk
