@@ -29,6 +29,7 @@ spec:
       containers:
         - name: es-client
           image: gcr.io/sqhive-backend/elastic:latest
+          imagePullPolicy: Always
           env:
             - name: NAMESPACE
               value: "elastic"
