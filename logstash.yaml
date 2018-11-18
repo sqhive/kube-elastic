@@ -1,0 +1,24 @@
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: logstash
+  namespace: elastic
+  labels:
+    component: logstash
+spec:
+  serviceName: logstash
+  replicas: 1
+  selector:
+    matchLabels:
+     component: logstash
+  template:
+    metadata:
+      labels:
+        component: logstash
+    spec:
+      nodeSelector:
+        cloud.google.com/gke-nodepool: preemptible-pool
+      containers:
+        - name: logstash
+          image: gcr.io/sqhive-backend/logstash:latest
+          imagePullPolicy: Always
