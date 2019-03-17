@@ -17,7 +17,7 @@ spec:
         component: kibana
     spec:
       nodeSelector:
-        cloud.google.com/gke-nodepool: preemptible-pool
+        cloud.google.com/gke-nodepool: standard-pool
       containers:
         - name: kibana
           image: docker.elastic.co/kibana/kibana-oss:6.2.4

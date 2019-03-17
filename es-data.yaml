@@ -16,7 +16,7 @@ spec:
         role: data
     spec:
       nodeSelector:
-        cloud.google.com/gke-nodepool: preemptible-pool
+        cloud.google.com/gke-nodepool: standard-pool
       initContainers:
         - name: init-sysctl
           image: busybox:1.27.2

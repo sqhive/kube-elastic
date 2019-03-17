@@ -6,6 +6,8 @@ metadata:
   labels:
     component: elasticsearch
     role: client
+  annotations:
+    beta.cloud.google.com/backend-config: '{"ports": {"80":"elastic-backend"}}'
 spec:
   selector:
     component: elasticsearch
